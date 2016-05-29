@@ -15,13 +15,15 @@ class WebUser extends CWebUser
             return false;
         }
 
-        $role = $this->getState("role");
+        $roleCode = $this->getState("role_code");
 
-        if ($role == 1) {
+        $roles = ['SUPER_ADMIN','ADMIN','STAFF'];
+
+        if (in_array($roleCode, $roles)) {
             return true; // admin role has access to everything
         }
 
         // allow access if the operation request is the current user's role
-        return ($operation == $role);
+        return ($operation == $roleCode);
     }
 }

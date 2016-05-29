@@ -20,17 +20,24 @@ class UserIdentity extends CUserIdentity
 	 */
 	 public function authenticate()
 	 {
-			 $record = User::model()->findByAttributes(['username'=>$this->username]);
+			 $user = User::model()->findByAttributes(['username'=>$this->username]);
 
-			 if ($record == null) {
+			 if ($user == null) {
 					 $this->errorCode=self::ERROR_USERNAME_INVALID;
 
-			 } elseif (!password_verify($this->password, $record->password)) {
+			 } elseif (!password_verify($this->password, $user->password)) {
 				 	$this->errorCode=self::ERROR_PASSWORD_INVALID;
 
 			 } else {
-					 $this->id = $record->id;
-					 $this->setState('role', $record->role_id);
+
+					 $role = Role::model()->findByAttributes(['id'=>$user->role_id]);
+					 
+					 $this->id = $user->id;
+					 $this->setState('role_id', $user->role_id);
+					 $this->setState('role_code', $role->code);
+					 $this->setState('role_name', $role->name);
+					 $this->setState('username', $user->username);
+					 $this->setState('name', $user->name);
 					 $this->errorCode=self::ERROR_NONE;
 			 }
 
