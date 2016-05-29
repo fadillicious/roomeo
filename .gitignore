@@ -1,0 +1,9 @@
+vendor
+composer.lock
+www/assets/*
+protected/runtime/*
+protected/vendor/
+
+protected/config/console.php
+protected/config/database.php
+protected/config/main.php
