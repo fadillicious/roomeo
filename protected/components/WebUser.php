@@ -17,7 +17,7 @@ class WebUser extends CWebUser
 
         $roleCode = $this->getState("role_code");
 
-        $roles = ['SUPER_ADMIN','ADMIN','STAFF'];
+        $roles = ['SUPER_ADMIN'];
 
         if (in_array($roleCode, $roles)) {
             return true; // admin role has access to everything
