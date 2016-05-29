@@ -2,6 +2,9 @@
 
 class SiteController extends Controller
 {
+
+  // public $layout='//layouts/column-content';
+
 	/**
 	 * @return array action filters
 	 */
@@ -26,7 +29,7 @@ class SiteController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','contact'),
+				'actions'=>array('index','contact','page'),
 				'users'=>array('@'),
 			),
 			// array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -115,6 +118,8 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
+	 	$this->layout='//layouts/column-login';
+
 		$model=new LoginForm;
 
 		// if it is ajax validation request
