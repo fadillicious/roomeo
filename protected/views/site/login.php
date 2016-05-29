@@ -9,45 +9,73 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Login</h1>
-
-<p>Please fill out the following form with your login credentials:</p>
-
-<div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableClientValidation'=>true,
 	'clientOptions'=>array(
 		'validateOnSubmit'=>true,
 	),
+	'htmlOptions'=>array(
+		'class'=>'form-signin',
+	),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+		<div class="form-signin-heading text-center">
+				<h1 class="sign-title">Sign In</h1>
+				<img src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/images/login-logo.png" alt=""/>
+		</div>
+		<div class="login-wrap">
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
+				<!-- form username -->
+				<?php echo $form->textField($model,'username', ['class'=>'form-control', 'placeholder'=>'Username']); ?>
+				<?php echo $form->error($model,'username', ['class'=>'alert alert-danger']); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password'); ?>
-		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
-		</p>
-	</div>
+				<!-- form password -->
+				<?php echo $form->passwordField($model,'password', ['class'=>'form-control', 'placeholder'=>'Password']); ?>
+				<?php echo $form->error($model,'password', ['class'=>'alert alert-danger']); ?>
 
-	<div class="row rememberMe">
-		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
-		<?php echo $form->error($model,'rememberMe'); ?>
-	</div>
+				<!-- button login -->
+				<?php echo CHtml::tag('button', array(
+		        'class'=>'btn btn-lg btn-login btn-block',
+		        'type'=>'submit'
+		      ), '<i class="fa fa-check"></i>');
+			 ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
-	</div>
+				<!-- <div class="registration">
+						Not a member yet?
+						<a class="" href="registration.html">
+								Signup
+						</a>
+				</div>
+				<label class="checkbox">
+						<?php //echo $form->checkBox($model,'rememberMe'); ?> Remember me
+						<span class="pull-right">
+								<a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+						</span>
+				</label> -->
+
+		</div>
+
+		<!-- Modal -->
+		<!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+				<div class="modal-dialog">
+						<div class="modal-content">
+								<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title">Forgot Password ?</h4>
+								</div>
+								<div class="modal-body">
+										<p>Enter your e-mail address below to reset your password.</p>
+										<input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+								</div>
+								<div class="modal-footer">
+										<button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+										<button class="btn btn-primary" type="button">Submit</button>
+								</div>
+						</div>
+				</div>
+		</div> -->
+		<!-- modal -->
 
 <?php $this->endWidget(); ?>
-</div><!-- form -->

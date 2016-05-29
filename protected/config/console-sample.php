@@ -5,6 +5,12 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Roomeo',
+	'commandMap' => array(
+        'migrate' => array(
+            'class' => 'system.cli.commands.MigrateCommand',
+            'migrationTable' => 't_migration'
+        )
+    )
 
 	// preloading 'log' component
 	'preload'=>array('log'),
