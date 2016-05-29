@@ -79,4 +79,3 @@ $this->breadcrumbs=array(
 		<!-- modal -->
 
 <?php $this->endWidget(); ?>
-<!-- </div> -->

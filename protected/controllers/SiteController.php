@@ -3,7 +3,7 @@
 class SiteController extends Controller
 {
 
-  // public $layout='//layouts/column-content';
+  public $layout='//layouts/column-content';
 
 	/**
 	 * @return array action filters
