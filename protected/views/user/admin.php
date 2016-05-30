@@ -1,15 +1,8 @@
 <?php
-/* @var $this UserController */
-/* @var $model User */
 
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
-	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Create User', 'url'=>array('create')),
+	'<li>Users</li>'=>array('index'),
+	'<li>Manage</li>',
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,39 +19,102 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Users</h1>
+<!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                Users
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">User Management</a>
+                </li>
+                <li class="active">Users </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            List Users
+                             <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                             </span>
+                        </header>
+                        <div class="panel-body">
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+													<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+													<div class="search-form" style="display:none">
+													<?php $this->renderPartial('_search',array(
+														'model'=>$model,
+													)); ?>
+													</div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'user-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'name',
-		'username',
-		'email',
-		'password',
-		'role_id',
-		/*
-		'address',
-		'phone',
-		'profile_picture',
-		'is_active',
-		*/
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>
+													<?php $this->widget('zii.widgets.grid.CGridView', array(
+														'id'=>'user-grid',
+														'dataProvider'=>$model->search(),
+														'itemsCssClass' => 'table  table-hover general-table',
+														// 'filter'=>$model,
+														'columns'=>array(
+															['header'=>'No',
+															 'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+															 'htmlOptions'=>['style'=>'text-align: center;'],
+															 'headerHtmlOptions'=>['style'=>'width: 4%; text-align: center;']
+															],
+															'name',
+															'username',
+															'email',
+															'address',
+															['name'=>'phone',
+															 'htmlOptions'=>['style'=>'text-align: center;'],
+															 'headerHtmlOptions'=>['style'=>'width: 10%; text-align: center;']
+															],
+															['name'=>'role_id',
+															 'value'=> function($data) {
+																 		$role = Role::model()->findByAttributes(['id'=>$data->role_id]);
+																		return $role->name;
+																 },
+															 'htmlOptions'=>['style'=>'text-align: center;'],
+															 'headerHtmlOptions'=>['style'=>'width: 10%; text-align: center;']
+															],
+															['name'=>'is_active',
+															 'value'=> function($data) {
+																 		return ($data->is_active == true) ? 'Aktif' : 'Tidak Aktif';
+																 },
+															 'header'=>'Status Pegawai',
+															 'htmlOptions'=>['style'=>'text-align: center;'],
+															 'headerHtmlOptions'=>['style'=>'width: 10%; text-align: center;']
+															],
+															// 'password',
+															// 'id',
+															// 'profile_picture',
+
+															array(
+																'class'=>'CButtonColumn',
+																'header'=>'Actions',
+																'template'=>'{update} {delete}',
+																'buttons'=> [
+																	'update' => array(
+																			'options' => array('title' => 'Updates'),
+											                'label' => '<button class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></button>',
+											                'imageUrl' => false,
+											            ),
+																	'delete' => array(
+											                'options' => array('title' => 'Deletes'),
+											                'label' => '<button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>',
+																			'imageUrl' => false,
+											            ),
+																],
+															),
+														),
+													)); ?>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->

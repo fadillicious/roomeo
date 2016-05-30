@@ -53,7 +53,7 @@
             </li>
             <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>User Management</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="<?php echo Yii::app()->request->baseUrl; ?>/user/index"> Users</a></li>
+                    <li><a href="<?php echo Yii::app()->request->baseUrl; ?>/user/admin"> Users</a></li>
                     <li><a href="<?php echo Yii::app()->request->baseUrl; ?>/role/index"> Roles</a></li>
                 </ul>
             </li>
