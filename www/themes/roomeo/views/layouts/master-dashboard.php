@@ -66,6 +66,7 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/js/bootstrap.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/js/modernizr.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/js/jquery.nicescroll.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/bower_components/bootbox.js/bootbox.js"></script>
 
 <!--easy pie chart-->
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/js/easypiechart/jquery.easypiechart.js"></script>
@@ -97,6 +98,7 @@
 
 <!--common scripts for all pages-->
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/js/scripts.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/js/confirm.js"></script>
 
 <!--Dashboard Charts-->
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/js/dashboard-chart-init.js"></script>

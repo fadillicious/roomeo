@@ -118,3 +118,17 @@ $('.search-form form').submit(function(){
             </div>
         </div>
         <!--body wrapper end-->
+
+<?php
+Yii::app()->clientScript->registerScript('delete',"
+		$(document).ready(function(){
+				$('.delete').each(function(index){
+						$(this).click(function(){
+								var url = $(this).attr('href');
+								confirmDelete(url);
+								return false;
+						});
+				});
+		});
+");
+?>
