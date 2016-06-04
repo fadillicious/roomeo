@@ -113,6 +113,7 @@ $('.search-form form').submit(function(){
 													)); ?>
 
                         </div>
+
                     </section>
                 </div>
             </div>

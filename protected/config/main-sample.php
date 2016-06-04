@@ -78,6 +78,13 @@ return array(
 			),
 		),
 
+		// custom global widget
+		'widgetFactory' => array(
+				'widgets' => array(
+						'CLinkPager' => require(dirname(__FILE__).'/pagination.php'),
+				),
+		),
+
 	),
 
 	// application-level parameters that can be accessed
