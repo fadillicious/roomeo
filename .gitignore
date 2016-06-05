@@ -1,6 +1,7 @@
 vendor
 composer.lock
 www/assets/*
+www/images/*
 protected/runtime/*
 protected/vendor/
 
