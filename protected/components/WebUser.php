@@ -10,6 +10,7 @@ class WebUser extends CWebUser
      */
     public function checkAccess($operation, $params = [])
     {
+
         if (empty($this->id)) {
             // Not identified => no rights
             return false;

@@ -1,21 +1,40 @@
-<?php
-/* @var $this UserController */
-/* @var $model User */
 
-$this->breadcrumbs=array(
-	'Users'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
+<!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                Update Users
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">User Management</a>
+                </li>
+                <li>
+                    <a href="<?php echo Yii::app()->baseUrl; ?>/user/admin">Users</a>
+                </li>
+                <li class="active">Update Users </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
 
-$this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'View User', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage User', 'url'=>array('admin')),
-);
-?>
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                             <?php echo $model->name; ?>
+                             <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                             </span>
+                        </header>
+                        <div class="panel-body">
 
-<h1>Update User <?php echo $model->id; ?></h1>
+													<?php $this->renderPartial('_form', array('model'=>$model)); ?>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->

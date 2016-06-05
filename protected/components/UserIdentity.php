@@ -9,6 +9,7 @@ class UserIdentity extends CUserIdentity
 {
 
 	private $id;
+	const ERROR_USERNAME_NOT_ACTIVE = 3;
 
 	/**
 	 * Authenticates a user.
@@ -23,25 +24,29 @@ class UserIdentity extends CUserIdentity
 			 $user = User::model()->findByAttributes(['username'=>$this->username]);
 
 			 if ($user == null) {
-					 $this->errorCode=self::ERROR_USERNAME_INVALID;
+					 $this->errorCode = self::ERROR_USERNAME_INVALID;
 
 			 } elseif (!password_verify($this->password, $user->password)) {
-				 	$this->errorCode=self::ERROR_PASSWORD_INVALID;
+				 	$this->errorCode = self::ERROR_PASSWORD_INVALID;
+
+			 } elseif ($user->is_active == false) {
+					$this->errorCode = self::ERROR_USERNAME_NOT_ACTIVE;
 
 			 } else {
-
 					 $role = Role::model()->findByAttributes(['id'=>$user->role_id]);
-					 
+
 					 $this->id = $user->id;
 					 $this->setState('role_id', $user->role_id);
 					 $this->setState('role_code', $role->code);
 					 $this->setState('role_name', $role->name);
 					 $this->setState('username', $user->username);
 					 $this->setState('name', $user->name);
-					 $this->errorCode=self::ERROR_NONE;
+					 $this->setState('is_active', $user->is_active);
+					 $this->setState('profile_picture', $user->profile_picture);
+					 $this->errorCode = self::ERROR_NONE;
 			 }
 
-			 return !$this->errorCode;
+			 return $this->errorCode;
 	 }
 
 	 public function getId()

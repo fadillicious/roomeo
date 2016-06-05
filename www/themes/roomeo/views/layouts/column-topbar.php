@@ -24,7 +24,7 @@
                     <ul class="dropdown-list normal-list">
                         <li class="new">
                             <a href="">
-                                <span class="thumb"><img src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/images/photos/user1.png" alt="" /></span>
+                                <span class="thumb"><img src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/images/photos/avatar.png" alt="" /></span>
                                 <span class="desc">
                                   <span class="name">John Doe <span class="badge badge-success">new</span></span>
                                   <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -74,7 +74,16 @@
 
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/images/photos/user-avatar.png" alt="" />
+                    <?php
+                        if (Yii::app()->user->profile_picture) {
+                            $avatar = Yii::app()->request->baseUrl.'/images/'.Yii::app()->user->profile_picture;
+                        } else {
+                            $avatar = Yii::app()->request->baseUrl.'/themes/roomeo/assets/images/default.png';
+
+                        }
+                     ?>
+                     <img src="<?php echo $avatar; ?>" alt="" />
+
                       <?php echo Yii::app()->user->name; ?>
                     <span class="caret"></span>
                 </a>

@@ -17,10 +17,19 @@
 
     <div class="left-side-inner">
 
+      <?php
+          if (Yii::app()->user->profile_picture) {
+              $avatar = Yii::app()->request->baseUrl.'/images/'.Yii::app()->user->profile_picture;
+          } else {
+              $avatar = Yii::app()->request->baseUrl.'/themes/roomeo/assets/images/default.png';
+
+          }
+       ?>
+
         <!-- visible to small devices only -->
         <div class="visible-xs hidden-sm hidden-md hidden-lg">
             <div class="media logged-user">
-                <img alt="" src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/images/photos/user-avatar.png" class="media-object">
+                <img alt="" src="<?php echo $avatar; ?>" class="media-object">
                 <div class="media-body">
                     <h4><a href="#"><?php echo Yii::app()->user->name; ?></a></h4>
                     <span><?php echo Yii::app()->user->role_name; ?></span>

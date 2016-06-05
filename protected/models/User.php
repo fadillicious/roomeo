@@ -20,6 +20,10 @@
  */
 class User extends CActiveRecord
 {
+
+	public $password_repeat;
+
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -36,14 +40,17 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, username, email, password, role_id', 'required'),
-			array('role_id', 'numerical', 'integerOnly'=>true),
+			array('password', 'required', 'on'=>'create'),
+			array('name, username, email, role_id, phone, is_active', 'required'),
+			array('role_id, phone', 'numerical', 'integerOnly'=>true),
 			array('name, email', 'length', 'max'=>100),
 			array('username', 'length', 'max'=>50),
-			array('password', 'length', 'max'=>512),
-			array('phone', 'length', 'max'=>20),
-			array('profile_picture', 'length', 'max'=>255),
-			array('address, is_active', 'safe'),
+			array('phone', 'length', 'max'=>15),
+			array('profile_picture', 'file', 'types'=>'jpg, jpeg, png', 'allowEmpty'=>true, 'on'=>'update'),
+			array('email', 'email'),
+			array('password, password_repeat', 'length', 'min'=>6, 'max'=>512),
+      array('password', 'compare', 'compareAttribute'=>'password_repeat', 'on'=>'create'),
+			array('address, is_active, password_repeat', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, username, email, password, role_id, address, phone, profile_picture, is_active', 'safe', 'on'=>'search'),
@@ -125,4 +132,17 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+
+	public function beforeSave()
+	{
+     if (!empty($this->password_repeat)) {
+				 $this->password = password_hash($this->password_repeat, PASSWORD_DEFAULT);
+		 }
+
+     return true;
+
+	}
+
+
 }

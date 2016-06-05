@@ -46,12 +46,12 @@ $('.search-form form').submit(function(){
                         </header>
                         <div class="panel-body">
 
-													<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+													<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 													<div class="search-form" style="display:none">
-													<?php $this->renderPartial('_search',array(
-														'model'=>$model,
-													)); ?>
+													<?php //$this->renderPartial('_search',array('model'=>$model,)); ?>
 													</div><!-- search-form -->
+
+													<?php echo CHtml::link('<span class="fa fa-plus"></span> Create User',array('user/create'),array('class'=>'btn btn-info')); ?>
 
 													<?php $this->widget('zii.widgets.grid.CGridView', array(
 														'id'=>'user-grid',

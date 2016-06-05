@@ -63,16 +63,30 @@ class UserController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new User;
+		$model = new User;
+		$model->scenario = 'create';
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		if (isset($_POST['User'])) {
 
-		if(isset($_POST['User']))
-		{
-			$model->attributes=$_POST['User'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$model->attributes = $_POST['User'];
+				$uploadedFile      = CUploadedFile::getInstance($model,'profile_picture');
+
+				if (!empty($uploadedFile)) {
+						$random   = rand();
+						$fileName = "{$random}.{$uploadedFile->getExtensionName()}";
+						$model->profile_picture = $fileName;
+				}
+
+				if ($model->save()) {
+
+						if (!empty($uploadedFile)) {
+							  $path = Yii::app()->basePath . Yii::app()->params['profilePicturePath'] . $fileName;
+								$uploadedFile->saveAs($path);
+						}
+
+						$this->redirect(array('admin'));
+
+				}
 		}
 
 		$this->render('create',array(
@@ -87,16 +101,31 @@ class UserController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$model = $this->loadModel($id);
+		$model->scenario = 'update';
 
-		if(isset($_POST['User']))
-		{
-			$model->attributes=$_POST['User'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+
+		if (isset($_POST['User'])) {
+
+				$model->attributes = $_POST['User'];
+				$uploadedFile      = CUploadedFile::getInstance($model,'profile_picture');
+
+				if (!empty($uploadedFile)) {
+						$random   = rand();
+						$fileName = "{$random}.{$uploadedFile->getExtensionName()}";
+						$model->profile_picture = $fileName;
+				}
+
+				if ($model->save()) {
+
+						if (!empty($uploadedFile)) {
+								$path = Yii::app()->basePath . Yii::app()->params['profilePicturePath'] . $fileName;
+								$uploadedFile->saveAs($path);
+						}
+
+						$this->redirect(array('admin'));
+				}
 		}
 
 		$this->render('update',array(
@@ -123,10 +152,12 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('User');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		// $dataProvider=new CActiveDataProvider('User');
+		// $this->render('index',array(
+		// 	'dataProvider'=>$dataProvider,
+		// ));
+
+		$this->redirect(array('admin'));
 	}
 
 	/**
