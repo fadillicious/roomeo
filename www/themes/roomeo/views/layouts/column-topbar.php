@@ -24,7 +24,7 @@
                     <ul class="dropdown-list normal-list">
                         <li class="new">
                             <a href="">
-                                <span class="thumb"><img src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/images/photos/avatar.png" alt="" /></span>
+                                <span class="thumb"><img src="<?php echo Yii::app()->request->baseUrl; ?>/themes/roomeo/assets/images/photos/user2.png" alt="" /></span>
                                 <span class="desc">
                                   <span class="name">John Doe <span class="badge badge-success">new</span></span>
                                   <span class="msg">Lorem ipsum dolor sit amet...</span>

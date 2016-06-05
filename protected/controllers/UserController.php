@@ -52,9 +52,10 @@ class UserController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
+		$model = $this->loadModel($id);
+
+		Utils::renderJSON($model);
+
 	}
 
 	/**
@@ -143,8 +144,9 @@ class UserController extends Controller
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		if(!isset($_GET['ajax'])) {
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		}
 	}
 
 	/**
@@ -166,8 +168,8 @@ class UserController extends Controller
 	public function actionAdmin()
 	{
 		$model = new User('search');
-
 		$model->unsetAttributes();  // clear any default values
+		$model->dbCriteria->order = 'id ASC';
 
 		if (isset($_GET['User'])) {
 			  $model->attributes=$_GET['User'];

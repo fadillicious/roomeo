@@ -67,18 +67,18 @@ $('.search-form form').submit(function(){
 															'name',
 															'username',
 															'email',
-															'address',
-															['name'=>'phone',
-															 'htmlOptions'=>['style'=>'text-align: center;'],
-															 'headerHtmlOptions'=>['style'=>'width: 10%; text-align: center;']
-															],
+															// 'address',
+															// ['name'=>'phone',
+															//  'htmlOptions'=>['style'=>'text-align: center;'],
+															//  'headerHtmlOptions'=>['style'=>'width: 10%; text-align: center;']
+															// ],
 															['name'=>'role_id',
 															 'value'=> function($data) {
 																 		$role = Role::model()->findByAttributes(['id'=>$data->role_id]);
 																		return $role->name;
 																 },
 															 'htmlOptions'=>['style'=>'text-align: center;'],
-															 'headerHtmlOptions'=>['style'=>'width: 10%; text-align: center;']
+															 'headerHtmlOptions'=>['style'=>'width: 20%; text-align: center;']
 															],
 															['name'=>'is_active',
 															 'value'=> function($data) {
@@ -86,7 +86,7 @@ $('.search-form form').submit(function(){
 																 },
 															 'header'=>'Status Pegawai',
 															 'htmlOptions'=>['style'=>'text-align: center;'],
-															 'headerHtmlOptions'=>['style'=>'width: 10%; text-align: center;']
+															 'headerHtmlOptions'=>['style'=>'width: 20%; text-align: center;']
 															],
 															// 'password',
 															// 'id',
@@ -95,8 +95,14 @@ $('.search-form form').submit(function(){
 															array(
 																'class'=>'CButtonColumn',
 																'header'=>'Actions',
-																'template'=>'{update} {delete}',
+																'headerHtmlOptions'=>['style'=>'width: 10%; text-align: center;'],
+																'template'=>'{view}&nbsp;{update}&nbsp;{delete}',
 																'buttons'=> [
+																	'view' => array(
+																			'options' => array('title' => 'View', 'class'=>'view'),
+											                'label' => '<button class="btn btn-info btn-xs"><i class="fa fa-search-plus"></i></button>',
+											                'imageUrl' => false,
+											            ),
 																	'update' => array(
 																			'options' => array('title' => 'Updates'),
 											                'label' => '<button class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></button>',
@@ -127,6 +133,18 @@ Yii::app()->clientScript->registerScript('delete',"
 						$(this).click(function(){
 								var url = $(this).attr('href');
 								confirmDelete(url);
+								return false;
+						});
+				});
+		});
+");
+
+Yii::app()->clientScript->registerScript('view',"
+		$(document).ready(function(){
+				$('.view').each(function(index){
+						$(this).click(function(){
+								var url = $(this).attr('href');
+								viewUser(url);
 								return false;
 						});
 				});
